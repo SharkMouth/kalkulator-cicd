@@ -81,6 +81,24 @@ function calculateResult() {
 }
 
 
+// Tambahkan dukungan input dari keyboard
+document.addEventListener('keydown', function (event) {
+    const key = event.key;
+
+    if (!isNaN(key) || key === '.') {
+        appendToDisplay(key);
+    } else if (isOperator(key)) {
+        appendToDisplay(key);
+    } else if (key === 'Enter' || key === '=') {
+        event.preventDefault(); // Mencegah form submit jika ada
+        calculateResult();
+    } else if (key === 'Backspace') {
+        deleteLast();
+    } else if (key === 'Escape') {
+        clearDisplay();
+    }
+});
+
 // Ekspor fungsi untuk pengujian jika menggunakan modul Node.js (opsional untuk setup sederhana ini)
 
 if (typeof module !== 'undefined' && module.exports) {
